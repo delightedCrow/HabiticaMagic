@@ -6,62 +6,114 @@ class HabiticaAPIManager {
 		this.content = {};
 	}
 
-	fetchContentData(callback) {
-		const url = "https://habitica.com/api/v3/content?language=" +
-			this.language;
-		let req = this.constructor.APIRequest(url, this.xclient);
-		let hm = this;
-
-		req.onload = function() {
-			if (this.status == 200) {
-				let data = JSON.parse(this.responseText);
-				hm.content = data.data;
-				if (callback) {
-					callback();
-				}
-			}
-		};
-		req.send();
-	}
-
-	fetchAuthenticatedUser(userID, userAPIToken, callback) {
-		const url = "https://habitica.com/api/v3/user";
-		let req = this.constructor.authenticatedAPIRequest(url, this.xclient, userID, userAPIToken);
-		let hm = this;
-
-		req.onload = function() {
-			if (this.status == 200) {
-				var data = JSON.parse(this.responseText).data;
-				let user = new HabiticaUser(hm.replaceKeysWithContent(data));
-				callback(user);
-			}
-		};
-		req.send();
-	}
-
-	fetchUserTasks(userID, userAPIToken, callback) {
-		const url = "https://habitica.com/api/v3/tasks/user";
-		let req = this.constructor.authenticatedAPIRequest(url, this.xclient, userID, userAPIToken);
-		let hm = this;
-
-		req.onload = function() {
-			if (this.status == 200) {
-				var data = JSON.parse(this.responseText).data;
-				var tasks = new HabiticaUserTasksManager(data);
-				callback(tasks);
-			}
-		};
-		req.send();
-	}
-
-	fetchUserWithTasks(userID, userAPIToken, callback) {
-		this.fetchAuthenticatedUser(userID, userAPIToken, (user) => {
-			this.fetchUserTasks(userID, userAPIToken, (tasks) => {
-				user.tasks = tasks;
-				callback(user);
-			});
+	// UNAUTHENTICATED HELPER FUNCTIONS
+	fetchContentData() {
+		const baseURL = "https://habitica.com/api/v3/content";
+		return this.getRequest(baseURL, {language: this.language})
+		.then((data) => {
+			this.content = data;
 		});
 	}
+
+	fetchUser(userID) {
+		const baseURL = "https://habitica.com/api/v3/members/" + userID;
+		return this.getRequest(baseURL)
+		.then((data) => {
+			let user = new HabiticaUser(this.replaceKeysWithContent(data));
+			return user;
+		});
+	}
+
+	// AUTHENTICATED HELPER FUNCTIONS
+	fetchAuthenticatedUser(userID, userAPIToken) {
+		const url = "https://habitica.com/api/v3/user";
+		return this.authGetRequest(url, userID, userAPIToken)
+		.then((data) => {
+			let user = new HabiticaUser(this.replaceKeysWithContent(data));
+			return user;
+		});
+	}
+
+	fetchUserTasks(userID, userAPIToken) {
+		const url = "https://habitica.com/api/v3/tasks/user";
+		 return this.authGetRequest(url, userID, userAPIToken)
+		.then((data) => {
+			let tasks = new HabiticaUserTasksManager(data);
+			return tasks;
+		});
+	}
+
+	fetchUserWithTasks(userID, userAPIToken) {
+		var user;
+		return this.fetchAuthenticatedUser(userID, userAPIToken)
+		.then((newUser) => {
+			user = newUser;
+			return this.fetchUserTasks(userID, userAPIToken);
+		})
+		.then((tasks) => {
+			user.tasks = tasks;
+			return user;
+		});
+	}
+
+	// API REQUEST FUNCTIONS
+
+	authGetRequest(baseURL, userID, userAPIToken, queryParams={}) {
+		let url = this.getQueryStringURL(baseURL, queryParams);
+
+		let promise = new Promise((resolve, reject) => {
+			let req = new XMLHttpRequest();
+			req.open("GET", url);
+
+			req.onerror = function() {
+				reject(this.statusText);
+			};
+
+			req.onload = function() {
+				if (this.status == 200) {
+					var data = JSON.parse(this.responseText).data;
+					resolve(data);
+				} else {
+					reject(this.responseText);
+				}
+			}
+
+			req.setRequestHeader("x-api-user", userID);
+			req.setRequestHeader("x-api-key", userAPIToken);
+			req.setRequestHeader("x-client", this.xclient);
+			req.send();
+		});
+
+		return promise;
+	}
+
+	getRequest(baseURL, queryParams={}) {
+		let url = this.getQueryStringURL(baseURL, queryParams);
+
+		let promise = new Promise((resolve, reject) => {
+			let req = new XMLHttpRequest();
+			req.open("GET", url);
+
+			req.onerror = function() {
+				reject(this.statusText);
+			};
+
+			req.onload = function() {
+				if (this.status == 200) {
+					var data = JSON.parse(this.responseText).data;
+					resolve(data);
+				} else {
+					reject(this.responseText);
+				}
+			}
+			req.setRequestHeader("x-client", this.xclient);
+			req.send();
+		});
+
+		return promise;
+	}
+
+	// CLASS HELPER FUNCTIONS
 
 	replaceKeysWithContent(data) {
 		// replace equipped and costume gear with full content version
@@ -79,31 +131,14 @@ class HabiticaAPIManager {
 		return data;
 	}
 
-	// API REQUEST FUNCTIONS
-	static authenticatedAPIRequest(url, xclient, userID, userAPIToken) {
-		let req = new XMLHttpRequest();
-		req.open("GET", url);
+	getQueryStringURL(baseURL, queryParams) {
+		let params = Object.entries(queryParams);
+		if (params.length < 1) {
+			return baseURL;
+		}
 
-		req.onerror = function() {
-			console.error("HabiticaAPI Error: ", this.statusText);
-		};
-
-		req.setRequestHeader("x-api-user", userID);
-		req.setRequestHeader("x-api-key", userAPIToken);
-		req.setRequestHeader("x-client", xclient);
-		return req;
-	}
-
-	static APIRequest(url, xclient) {
-		let req = new XMLHttpRequest();
-		req.open("GET", url);
-
-		req.onerror = function() {
-			console.error("HabiticaAPI Error: ", this.statusText);
-		};
-
-		req.setRequestHeader("x-client", this.xclient);
-
-		return req;
+		return baseURL + "?" +
+			params.map(kv => kv.map(encodeURIComponent).join("="))
+			.join("&");
 	}
 }

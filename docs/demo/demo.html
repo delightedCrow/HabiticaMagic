@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HabiticaMagicJS - Demo</title>
+  <meta name="description" content="HabiticaMagicJS - Demo">
+  <meta name="author" content="@delightedCrow & @ArrayOfFrost">
+  <style>
+    .template {display: none;}
+  </style>
+  <script src="demo.js"></script>
+</head>
+
+<body>
+	<h1>HabiticaMagicJS - Demo</h1>
+  <p>This demo uses HabiticaMagicJS to get user profile data from the Habitica API and Nunjucks to render HTML templates.</p>
+  <div><input type="text" value="fe3a326e-eba8-462a-968e-b97ab79336f5" id="userID-field"/> <input type="submit" onclick="demo.fetchUser()" /></div>
+  <div id="profile-content"></div>
+
+  <div id="profile-template" class="template">
+    <p>Got a Habitican: {{ user.displayName }}</p>
+  </div>
+  <div id="error-template" class="template">
+    <p>An error: {{ data }}</p>
+  </div>
+  <script src="../../dist/HabiticaMagic-v2.0.0.js"></script>
+  <script src="https://mozilla.github.io/nunjucks/files/nunjucks.js"></script>
+</body>
+</html>

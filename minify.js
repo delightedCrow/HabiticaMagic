@@ -3,7 +3,7 @@ const minify = require('@node-minify/core');
 const terser = require('@node-minify/terser');
 const noCompress = require('@node-minify/no-compress');
 
-let version = "v1.0.0";
+let version = "v2.0.0";
 let output = `dist/HabiticaMagic-${version}.js`;
 let minOutput = `dist/HabiticaMagic-${version}.min.js`;
 let files = [
