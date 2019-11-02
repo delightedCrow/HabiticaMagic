@@ -23,6 +23,8 @@ class HabiticaAPIManager {
 		this.content = {};
 	}
 
+	// UNAUTHENTICATED HELPER FUNCTIONS
+	
 	/**
 	 * Load Habitica content from the api. Populates the {@link HabiticaAPIManager#content|content} attribute.
 	 * @returns {Promise}

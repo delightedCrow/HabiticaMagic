@@ -120,9 +120,9 @@
               
                 
                 <li><a
-                  href='#habiticaapitoken'
+                  href='#habiticauserid'
                   class="">
-                  HabiticaAPIToken
+                  HabiticaUserID
                   
                 </a>
                 
@@ -130,9 +130,9 @@
               
                 
                 <li><a
-                  href='#habiticauserid'
+                  href='#habiticaapitoken'
                   class="">
-                  HabiticaUserID
+                  HabiticaAPIToken
                   
                 </a>
                 
@@ -352,9 +352,9 @@
               
                 
                 <li><a
-                  href='#damagestats'
+                  href='#dailystats'
                   class="">
-                  DamageStats
+                  DailyStats
                   
                 </a>
                 
@@ -1290,17 +1290,17 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='habiticaapitoken'>
-      HabiticaAPIToken
+    <h3 class='fl m0' id='habiticauserid'>
+      HabiticaUserID
     </h3>
     
     
   </div>
   
 
-  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
+  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
 
-    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
+    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
   
     <p>
       Type:
@@ -1343,17 +1343,17 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='habiticauserid'>
-      HabiticaUserID
+    <h3 class='fl m0' id='habiticaapitoken'>
+      HabiticaAPIToken
     </h3>
     
     
   </div>
   
 
-  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
+  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
 
-    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
+    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
   
     <p>
       Type:
@@ -2952,7 +2952,7 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   <p>Calculates the number of unfinished dailies due today, and any
 incoming damage that the user will take as a result.</p>
 
-    <div class='pre p1 fill-light mt0'>calculateDailyStatsFor(user: <a href="#habiticauser">HabiticaUser</a>): <a href="#damagestats">DamageStats</a></div>
+    <div class='pre p1 fill-light mt0'>calculateDailyStatsFor(user: <a href="#habiticauser">HabiticaUser</a>): <a href="#dailystats">DailyStats</a></div>
   
   
 
@@ -2984,7 +2984,7 @@ incoming damage that the user will take as a result.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#damagestats">DamageStats</a></code>:
+      <code><a href="#dailystats">DailyStats</a></code>:
         
 
       
@@ -3024,8 +3024,8 @@ incoming damage that the user will take as a result.</p>
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='damagestats'>
-      DamageStats
+    <h3 class='fl m0' id='dailystats'>
+      DailyStats
     </h3>
     
     
@@ -3033,7 +3033,7 @@ incoming damage that the user will take as a result.</p>
   
 
   
-    <div class='pre p1 fill-light mt0'>DamageStats</div>
+    <div class='pre p1 fill-light mt0'>DailyStats</div>
   
     <p>
       Type:

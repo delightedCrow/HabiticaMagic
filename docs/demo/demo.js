@@ -5,7 +5,7 @@ var demo = {
 		this.errorTemplate = nunjucks.compile(document.getElementById("error-template").innerHTML);
 
 		let xclient = "6c2c57d5-67c3-4edf-9a74-2d6d70aa4c56-HabiticaMagicDemo";
-		this.manager = new HabiticaAPIManager("en", xclient);
+		this.manager = new HabiticaAPIManager(xclient, "en");
 
 		this.manager.fetchContentData().then(() => {
 			this.fetchUser();
