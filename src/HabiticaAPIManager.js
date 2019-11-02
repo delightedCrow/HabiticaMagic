@@ -24,7 +24,7 @@ class HabiticaAPIManager {
 	}
 
 	// UNAUTHENTICATED HELPER FUNCTIONS
-	
+
 	/**
 	 * Load Habitica content from the api. Populates the {@link HabiticaAPIManager#content|content} attribute.
 	 * @returns {Promise}
@@ -32,7 +32,8 @@ class HabiticaAPIManager {
 	fetchContentData() {
 		const baseURL = "https://habitica.com/api/v3/content";
 		return this.getRequest(baseURL, {language: this.language})
-		.then((data) => {
+		.then((rawData) => {
+			var data = JSON.parse(rawData).data;
 			this.content = data;
 		});
 	}
@@ -45,7 +46,8 @@ class HabiticaAPIManager {
 	fetchUser(userID) {
 		const baseURL = "https://habitica.com/api/v3/members/" + userID;
 		return this.getRequest(baseURL)
-		.then((data) => {
+		.then((rawData) => {
+			var data = JSON.parse(rawData).data;
 			let user = new HabiticaUser(this.replaceKeysWithContent(data));
 			return user;
 		});
@@ -62,7 +64,8 @@ class HabiticaAPIManager {
 	fetchAuthenticatedUser(userID, userAPIToken) {
 		const url = "https://habitica.com/api/v3/user";
 		return this.authGetRequest(url, userID, userAPIToken)
-		.then((data) => {
+		.then((rawData) => {
+			var data = JSON.parse(rawData).data;
 			let user = new HabiticaUser(this.replaceKeysWithContent(data));
 			return user;
 		});
@@ -77,7 +80,8 @@ class HabiticaAPIManager {
 	fetchUserTasks(userID, userAPIToken) {
 		const url = "https://habitica.com/api/v3/tasks/user";
 		 return this.authGetRequest(url, userID, userAPIToken)
-		.then((data) => {
+		.then((rawData) => {
+			var data = JSON.parse(rawData).data;
 			let tasks = new HabiticaUserTasksManager(data);
 			return tasks;
 		});
@@ -110,7 +114,7 @@ class HabiticaAPIManager {
 	 * @param {HabiticaUserID} userID - the ID of the user, needed for authentication.
 	 * @param {HabiticaAPIToken} userAPIToken - the API Token for the user, needed for authentication.
 	 * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
-	 * @returns {Promise<object>} Promise containing the API response data as an object.
+	 * @returns {Promise<String>} Promise containing the raw API response data as a string.
 	 */
 	authGetRequest(baseURL, userID, userAPIToken, queryParams={}) {
 		let url = this.getQueryStringURL(baseURL, queryParams);
@@ -125,8 +129,7 @@ class HabiticaAPIManager {
 
 			req.onload = function() {
 				if (this.status == 200) {
-					var data = JSON.parse(this.responseText).data;
-					resolve(data);
+					resolve(this.responseText);
 				} else {
 					reject(this.responseText);
 				}
@@ -147,7 +150,7 @@ class HabiticaAPIManager {
 	 * For accessing personal data endpoints, use {@link HabiticaAPIManager#authGetRequest|authGetRequest}
 	 * @param {string} baseURL - the url of the api call.
 	 * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
-	 * @returns {Promise<object>} Promise containing the API response data as an object.
+	 * @returns {Promise<String>} Promise containing the raw API response data as a string.
 	 */
 	getRequest(baseURL, queryParams={}) {
 		let url = this.getQueryStringURL(baseURL, queryParams);
@@ -162,8 +165,7 @@ class HabiticaAPIManager {
 
 			req.onload = function() {
 				if (this.status == 200) {
-					var data = JSON.parse(this.responseText).data;
-					resolve(data);
+					resolve(this.responseText);
 				} else {
 					reject(this.responseText);
 				}

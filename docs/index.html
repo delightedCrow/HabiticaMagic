@@ -26,26 +26,6 @@
               
                 
                 <li><a
-                  href='#habiticauserid'
-                  class="">
-                  HabiticaUserID
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#habiticaapitoken'
-                  class="">
-                  HabiticaAPIToken
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#habiticaapimanager'
                   class=" toggle-sibling">
                   HabiticaAPIManager
@@ -135,6 +115,26 @@
                   
                   
                 </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#habiticauserid'
+                  class="">
+                  HabiticaUserID
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#habiticaapitoken'
+                  class="">
+                  HabiticaAPIToken
+                  
+                </a>
                 
                 </li>
               
@@ -368,112 +368,6 @@
         </div>
       </div>
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='habiticauserid'>
-      HabiticaUserID
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
-
-    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='habiticaapitoken'>
-      HabiticaAPIToken
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
-
-    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -1067,7 +961,7 @@ into helpful class types.</p>
 
   <p>Make an authenticated GET request to the Habitica API. Data object returned varies based on the API url called.</p>
 
-    <div class='pre p1 fill-light mt0'>authGetRequest(baseURL: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, userID: <a href="#habiticauserid">HabiticaUserID</a>, userAPIToken: <a href="#habiticaapitoken">HabiticaAPIToken</a>, queryParams: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+    <div class='pre p1 fill-light mt0'>authGetRequest(baseURL: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, userID: <a href="#habiticauserid">HabiticaUserID</a>, userAPIToken: <a href="#habiticaapitoken">HabiticaAPIToken</a>, queryParams: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></div>
   
   
 
@@ -1127,8 +1021,8 @@ into helpful class types.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
-        Promise containing the API response data as an object.
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></code>:
+        Promise containing the raw API response data as a string.
 
       
     
@@ -1166,7 +1060,7 @@ into helpful class types.</p>
 Data object returned varies based on the API url called.
 For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetrequest">authGetRequest</a></p>
 
-    <div class='pre p1 fill-light mt0'>getRequest(baseURL: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, queryParams: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+    <div class='pre p1 fill-light mt0'>getRequest(baseURL: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, queryParams: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></div>
   
   
 
@@ -1208,8 +1102,8 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
-        Promise containing the API response data as an object.
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></code>:
+        Promise containing the raw API response data as a string.
 
       
     
@@ -1380,6 +1274,112 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
     </div>
   
 </div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='habiticauserid'>
+      HabiticaUserID
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
+
+    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='habiticaapitoken'>
+      HabiticaAPIToken
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
+
+    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
