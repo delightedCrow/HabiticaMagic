@@ -1,6 +1,6 @@
 {
-  "name": "habiticamagic",
-  "version": "1.0.0",
+  "name": "HabiticaMagicJS",
+  "version": "2.0.0",
   "description": "A convenient way to interact with the Habitica API (https://habitica.com/apidoc/).",
   "main": "build.js",
   "dependencies": {
@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node minify.js"
+    "build": "node minify.js",
+    "build:docs": "./node_modules/.bin/documentation build src/*.js -f html -o docs"
   },
   "repository": {
     "type": "git",

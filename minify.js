@@ -2,8 +2,9 @@ const fs = require('fs');
 const minify = require('@node-minify/core');
 const terser = require('@node-minify/terser');
 const noCompress = require('@node-minify/no-compress');
+const package = require('./package.json');
 
-let version = "v2.0.0";
+let version = "v" + package.version;
 let output = `dist/HabiticaMagic-${version}.js`;
 let minOutput = `dist/HabiticaMagic-${version}.min.js`;
 let files = [

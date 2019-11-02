@@ -84,7 +84,7 @@ class HabiticaUserTasksManager {
 	 * Calculates the number of unfinished dailies due today, and any
 	 * incoming damage that the user will take as a result.
 	 * @param {HabiticaUser} user - the user's stats are needed to calculate damage correctly.
-	 * @returns {DamageStats}
+	 * @returns {DailyStats}
 	 */
 	calculateDailyStatsFor(user) {
 
@@ -150,7 +150,7 @@ class HabiticaUserTasksManager {
 
 
 /**
- * @typedef {object} DamageStats
+ * @typedef {object} DailyStats
  * @property {Number} dueCount - Count of unfinished dailes that are due today.
  * @property {Number} totalDamageToSelf - Total damage user will receive from missed dailies and boss damage.
  * @property {Number} dailyDamageToSelf - Damage user will receive from missed dailies.
@@ -423,6 +423,8 @@ class HabiticaAPIManager {
 		this.content = {};
 	}
 
+	// UNAUTHENTICATED HELPER FUNCTIONS
+	
 	/**
 	 * Load Habitica content from the api. Populates the {@link HabiticaAPIManager#content|content} attribute.
 	 * @returns {Promise}
