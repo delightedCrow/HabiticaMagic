@@ -1,12 +1,32 @@
+/**
+ * This class manages the calls to the Habitica API and converts the responses
+ * into helpful class types.
+ * @param {string} xclient - The xclient header string for this application. See {@link HabiticaAPIManager#xclient|xclient}
+ * @param {string} [language="en"] - The language code to retrieve content for. See {@link HabiticaAPIManager#language|language}
+ */
 class HabiticaAPIManager {
-	constructor(language="en", xclient) {
+	constructor(xclient, language="en") {
+		/**
+		 * The language code to retrieve content for. See https://habitica.com/apidoc/#api-Content-ContentGet for list of allowed values.
+		 * @type {string}
+		 */
 		this.language = language;
-		// For more info on the xclient header: https://habitica.fandom.com/wiki/Guidance_for_Comrades#X-Client_Header
+		/**
+		 * The xclient header string for this application. See https://habitica.fandom.com/wiki/Guidance_for_Comrades#X-Client_Header for details.
+		 * @type {string}
+		 */
 		this.xclient = xclient;
+		/**
+		 * The data cache for looking up Habitica content such as items, quests, or appearance information.
+		 * @type {object}
+		 */
 		this.content = {};
 	}
 
-	// UNAUTHENTICATED HELPER FUNCTIONS
+	/**
+	 * Load Habitica content from the api. Populates the {@link HabiticaAPIManager#content|content} attribute.
+	 * @returns {Promise}
+	 */
 	fetchContentData() {
 		const baseURL = "https://habitica.com/api/v3/content";
 		return this.getRequest(baseURL, {language: this.language})
@@ -15,6 +35,11 @@ class HabiticaAPIManager {
 		});
 	}
 
+	/**
+	 * Fetches a HabiticaUser instance from the api, containing publicly visible user data.
+	 * @param {HabiticaUserID} userID - The ID of the habitica user.
+	 * @returns {Promise<HabiticaUser>} Promise provides a HabiticaUser instance.
+	 */
 	fetchUser(userID) {
 		const baseURL = "https://habitica.com/api/v3/members/" + userID;
 		return this.getRequest(baseURL)
@@ -25,6 +50,13 @@ class HabiticaAPIManager {
 	}
 
 	// AUTHENTICATED HELPER FUNCTIONS
+
+	/**
+	 * Fetches a HabiticaUser instance, including personal information.
+	 * @param {HabiticaUserID} userID
+	 * @param {HabiticaAPIToken} userAPIToken
+	 * @returns {Promise<HabiticaUser>} Promise provides a HabiticaUser instance.
+	 */
 	fetchAuthenticatedUser(userID, userAPIToken) {
 		const url = "https://habitica.com/api/v3/user";
 		return this.authGetRequest(url, userID, userAPIToken)
@@ -34,6 +66,12 @@ class HabiticaAPIManager {
 		});
 	}
 
+	/**
+	 * Fetches the list of tasks for a given user.
+	 * @param {HabiticaUserID} userID
+	 * @param {HabiticaAPIToken} userAPIToken
+	 * @returns {Promise<HabiticaUserTasksManager>}
+	 */
 	fetchUserTasks(userID, userAPIToken) {
 		const url = "https://habitica.com/api/v3/tasks/user";
 		 return this.authGetRequest(url, userID, userAPIToken)
@@ -43,6 +81,12 @@ class HabiticaAPIManager {
 		});
 	}
 
+	/**
+	 * Fetches a user and their list of tasks.
+	 * @param {HabiticaUserID} userID
+	 * @param {HabiticaAPIToken} userAPIToken
+	 * @returns {Promise<HabiticaUser>} Promise provides a HabiticaUser instance, with a populated tasks manager.
+	 */
 	fetchUserWithTasks(userID, userAPIToken) {
 		var user;
 		return this.fetchAuthenticatedUser(userID, userAPIToken)
@@ -58,6 +102,14 @@ class HabiticaAPIManager {
 
 	// API REQUEST FUNCTIONS
 
+	/**
+	 * Make an authenticated GET request to the Habitica API. Data object returned varies based on the API url called.
+	 * @param {string} baseURL - the url of the api call.
+	 * @param {HabiticaUserID} userID - the ID of the user, needed for authentication.
+	 * @param {HabiticaAPIToken} userAPIToken - the API Token for the user, needed for authentication.
+	 * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
+	 * @returns {Promise<object>} Promise containing the API response data as an object.
+	 */
 	authGetRequest(baseURL, userID, userAPIToken, queryParams={}) {
 		let url = this.getQueryStringURL(baseURL, queryParams);
 
@@ -87,6 +139,14 @@ class HabiticaAPIManager {
 		return promise;
 	}
 
+	/**
+	 * Make a GET request to the Habitica API.
+	 * Data object returned varies based on the API url called.
+	 * For accessing personal data endpoints, use {@link HabiticaAPIManager#authGetRequest|authGetRequest}
+	 * @param {string} baseURL - the url of the api call.
+	 * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
+	 * @returns {Promise<object>} Promise containing the API response data as an object.
+	 */
 	getRequest(baseURL, queryParams={}) {
 		let url = this.getQueryStringURL(baseURL, queryParams);
 
@@ -115,6 +175,11 @@ class HabiticaAPIManager {
 
 	// CLASS HELPER FUNCTIONS
 
+	/**
+	 * Updates the data object keys with values from the the {@link HabiticaAPIManager#content|content}.
+	 * @param {object} data - See {@link HabiticaUser#apiData|HabiticaUser.apiData}
+	 * @returns {object} The same data object passed in, after it is updated.
+	 */
 	replaceKeysWithContent(data) {
 		// replace equipped and costume gear with full content version
 		for (var section of [data.items.gear.equipped, data.items.gear.costume]) {
@@ -131,6 +196,12 @@ class HabiticaAPIManager {
 		return data;
 	}
 
+	/**
+	 * Convert a base url and query parameters into a full url with querystring.
+	 * @param {string} baseURL the URI of the API endpoint.
+	 * @param {object} queryParams key-value pairs in an object to be parameterized.
+	 * @returns {string} the full url with querystring.
+	 */
 	getQueryStringURL(baseURL, queryParams) {
 		let params = Object.entries(queryParams);
 		if (params.length < 1) {
@@ -142,3 +213,14 @@ class HabiticaAPIManager {
 			.join("&");
 	}
 }
+
+
+/**
+ * The User's ID. See https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29
+ * @typedef {string} HabiticaUserID
+ */
+
+/**
+ * The User's API Token. See https://habitica.fandom.com/wiki/API_Options#API_Token
+ * @typedef {string} HabiticaAPIToken
+ */

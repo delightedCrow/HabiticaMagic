@@ -1,16 +1,37 @@
+/**
+ * A class representing the list of tasks for a HabiticaUser.
+ * @param {Array<object>} data - the list of tasks returned from the api call
+ */
 class HabiticaUserTasksManager {
 	constructor(data) {
+		/**
+		 * The list of tasks.
+		 * @type {Array<object>}
+		 */
 		this.apiData = data;
 	}
 
+	/**
+	 * The list of tasks.
+	 * @type {Array<object>}
+	 */
 	get taskList() {
 		return this.apiData;
 	}
 
+	/**
+	 * The list of Todo tasks due by the end of today.
+	 * @type {Array<object>}
+	 */
 	get todosDueToday() {
 		return this.todosDueOnDate(moment().endOf('day'));
 	}
 
+	/**
+	 * The list of Todo tasks due by the end of a specific date.
+	 * @param {Date} dueDate the date to compare tasks due dates to.
+	 * @returns {Array<object>}
+	 */
 	todosDueOnDate(dueDate) {
 		var todos = [];
 
@@ -29,6 +50,12 @@ class HabiticaUserTasksManager {
 		return todos;
 	}
 
+	/**
+	 * Calculates the number of unfinished dailies due today, and any
+	 * incoming damage that the user will take as a result.
+	 * @param {HabiticaUser} user - the user's stats are needed to calculate damage correctly.
+	 * @returns {DamageStats}
+	 */
 	calculateDailyStatsFor(user) {
 
 		var stats = {
@@ -90,3 +117,13 @@ class HabiticaUserTasksManager {
 		this.dailyStats = stats;
 	}
 }
+
+
+/**
+ * @typedef {object} DamageStats
+ * @property {Number} dueCount - Count of unfinished dailes that are due today.
+ * @property {Number} totalDamageToSelf - Total damage user will receive from missed dailies and boss damage.
+ * @property {Number} dailyDamageToSelf - Damage user will receive from missed dailies.
+ * @property {Number} bossDamage - Damage entire party will receive from boss due to missed dailies.
+ * @property {Number} dailiesEvaded - Number of unfinished dailes ignored due to Rogue sneakiness.
+ */
