@@ -19,7 +19,7 @@ var demo = {
 	fetchUser: function() {
 		let userID = document.getElementById("userID-field").value;
 		let xclient = "6c2c57d5-67c3-4edf-9a74-2d6d70aa4c56-HabiticaMagicDemo";
-		let manager = new HabiticaAPIManager(xclient, "en");
+		let manager = new HabiticaAPIManager(xclient);
 
 		// First we fetch the Habitica Content so that the Habitica user
 		// we get later will have all their armor & quest data fully

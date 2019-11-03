@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node minify.js",
+    "build": "npm run build:minify && npm run build:docs",
+    "build:minify": "node minify.js",
     "build:docs": "./node_modules/.bin/documentation build src/*.js -f html -o docs"
   },
   "repository": {
