@@ -4,11 +4,11 @@ HabiticaMagicJS is a javascript API wrapper for the [Habitica API (V3)](https://
 
 ## Demo
 
-For an example of HabiticaMagicJS in action, check out the [demo](docs/demo/demo.html).
+For an example of HabiticaMagicJS in action, check out the [demo](https://delightedcrow.github.io/HabiticaMagic/docs/demo/demo.html).
 
 ## Docs
 
-For the most comprehensive and up-to-date documentation on HabiticaMagicJS functions, [check out the docs](docs/index.html).
+For the most comprehensive and up-to-date documentation on HabiticaMagicJS functions, [check out the docs](https://delightedcrow.github.io/HabiticaMagic/docs/index.html).
 
 ## Limitations
 
