@@ -185,6 +185,11 @@ class HabiticaAPIManager {
 	 * @returns {object} The same data object passed in, after it is updated.
 	 */
 	replaceKeysWithContent(data) {
+		// if we haven't fetched any content data, nothing we can do here
+		if (Object.entries(this.content).length == 0) {
+			return data;
+		}
+
 		// replace equipped and costume gear with full content version
 		for (var section of [data.items.gear.equipped, data.items.gear.costume]) {
 			for (var key in section) {
