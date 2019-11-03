@@ -26,9 +26,9 @@
               
                 
                 <li><a
-                  href='#habiticauserid'
+                  href='#habiticaapitoken'
                   class="">
-                  HabiticaUserID
+                  HabiticaAPIToken
                   
                 </a>
                 
@@ -36,9 +36,9 @@
               
                 
                 <li><a
-                  href='#habiticaapitoken'
+                  href='#habiticauserid'
                   class="">
-                  HabiticaAPIToken
+                  HabiticaUserID
                   
                 </a>
                 
@@ -195,6 +195,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#habiticauserbio'
+                        class='regular pre-open'>
+                        #bio
+                      </a></li>
+                      
+                      <li><a
                         href='#habiticauserexperience'
                         class='regular pre-open'>
                         #experience
@@ -300,6 +306,16 @@
               
                 
                 <li><a
+                  href='#dailystats'
+                  class="">
+                  DailyStats
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#habiticausertasksmanager'
                   class=" toggle-sibling">
                   HabiticaUserTasksManager
@@ -350,16 +366,6 @@
                 
                 </li>
               
-                
-                <li><a
-                  href='#dailystats'
-                  class="">
-                  DailyStats
-                  
-                </a>
-                
-                </li>
-              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -375,17 +381,17 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='habiticauserid'>
-      HabiticaUserID
+    <h3 class='fl m0' id='habiticaapitoken'>
+      HabiticaAPIToken
     </h3>
     
     
   </div>
   
 
-  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
+  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
 
-    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
+    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
   
     <p>
       Type:
@@ -428,17 +434,17 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='habiticaapitoken'>
-      HabiticaAPIToken
+    <h3 class='fl m0' id='habiticauserid'>
+      HabiticaUserID
     </h3>
     
     
   </div>
   
 
-  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
+  <p>The User's ID. See <a href="https://habitica.fandom.com/wiki/API_Options#User_ID_.28UID.29">https://habitica.fandom.com/wiki/API<em>Options#User_ID</em>.28UID.29</a></p>
 
-    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
+    <div class='pre p1 fill-light mt0'>HabiticaUserID</div>
   
     <p>
       Type:
@@ -1811,6 +1817,58 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
       </div>
     </div>
   
+    <div class='border-bottom' id='habiticauserbio'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>bio</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The bio of the user (may contain markdown formatting).</p>
+
+    <div class='pre p1 fill-light mt0'>bio</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='habiticauserexperience'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -2661,6 +2719,98 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='dailystats'>
+      DailyStats
+    </h3>
+    
+    
+  </div>
+  
+
+  
+    <div class='pre p1 fill-light mt0'>DailyStats</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>dueCount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          : Count of unfinished dailes that are due today.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>totalDamageToSelf</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          : Total damage user will receive from missed dailies and boss damage.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>dailyDamageToSelf</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          : Damage user will receive from missed dailies.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>bossDamage</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          : Damage entire party will receive from boss due to missed dailies.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>dailiesEvaded</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+          : Number of unfinished dailes ignored due to Rogue sneakiness.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='habiticausertasksmanager'>
       HabiticaUserTasksManager
     </h3>
@@ -3008,98 +3158,6 @@ incoming damage that the user will take as a result.</p>
     </div>
   
 </div>
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='dailystats'>
-      DailyStats
-    </h3>
-    
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>DailyStats</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>dueCount</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-          : Count of unfinished dailes that are due today.
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>totalDamageToSelf</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-          : Total damage user will receive from missed dailies and boss damage.
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>dailyDamageToSelf</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-          : Damage user will receive from missed dailies.
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>bossDamage</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-          : Damage entire party will receive from boss due to missed dailies.
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>dailiesEvaded</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
-          : Number of unfinished dailes ignored due to Rogue sneakiness.
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
 
   
 

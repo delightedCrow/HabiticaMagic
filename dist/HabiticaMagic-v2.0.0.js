@@ -222,6 +222,13 @@ class HabiticaUser {
 		return this.apiData.stats.class;
 	}
 	/**
+	 * The bio of the user (may contain markdown formatting).
+	 * @type {string}
+	 */
+	get bio() {
+		return this.apiData.profile.blurb;
+	}
+	/**
 	 * The experience points the user has gained so far this level.
 	 * @type {Number}
 	 */
