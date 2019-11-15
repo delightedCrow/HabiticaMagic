@@ -219,6 +219,13 @@ class HabiticaUser {
 	 * @type {string}
 	 */
 	get className() {
+		// the mage class is defined as "wizard" in the API, but referred
+		// to everywhere else in Habitica as mage, so we're gonna return mage
+		// here as that's what users on the front end would expect to see
+		// https://habitica.fandom.com/wiki/Guidance_for_Comrades#Class_Name_.28State_Mage_Instead_of_Wizard.29
+		if (this.apiData.stats.class == "wizard") {
+			return "mage";
+		}
 		return this.apiData.stats.class;
 	}
 	/**

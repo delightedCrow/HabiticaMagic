@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Nothing yet :)
 
+## 2.0.1 - 2019-11-15
+### Changed
+- Updating HabiticaUser.class to return "mage" instead of "wizard" for users with a mage class.
+
 ## 2.0.0 - 2019-11-2
 ### Added
 - So. Much. Documentation.

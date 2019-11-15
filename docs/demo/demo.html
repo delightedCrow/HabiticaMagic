@@ -28,7 +28,9 @@
 
 	<div id="profile-template" class="template">
 		<div class="title-header">
-			 <i class="hi-melior"></i>
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="scroll" class="title-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+				<!-- scroll icon by FontAwesome: https://fontawesome.com/license-->
+				<path fill="currentColor" d="M48 0C21.53 0 0 21.53 0 48v64c0 8.84 7.16 16 16 16h80V48C96 21.53 74.47 0 48 0zm208 412.57V352h288V96c0-52.94-43.06-96-96-96H111.59C121.74 13.41 128 29.92 128 48v368c0 38.87 34.65 69.65 74.75 63.12C234.22 474 256 444.46 256 412.57zM288 384v32c0 52.93-43.06 96-96 96h336c61.86 0 112-50.14 112-112 0-8.84-7.16-16-16-16H288z"></path></svg>
 			<h2 class="light">{{user.displayName}}</h2>
 			<div class="spacer"></div>
 		</div>
@@ -84,7 +86,7 @@
 	<div id="error-template" class="template">
 		<p>An error: {{ data }}</p>
 	</div>
-	<script src="../../dist/HabiticaMagic-v2.0.0.js"></script>
+	<script src="../../dist/HabiticaMagic-v2.0.1.js"></script>
 	<script src="https://mozilla.github.io/nunjucks/files/nunjucks.js"></script>
 </body>
 </html>
