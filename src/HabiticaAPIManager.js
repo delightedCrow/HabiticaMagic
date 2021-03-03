@@ -176,7 +176,7 @@ class HabiticaAPIManager {
 
 		return promise;
 	}
-	
+
   /**
 	 * Make a POST request to the Habitica API.
 	 * Data object returned varies based on the API url called.
@@ -186,32 +186,6 @@ class HabiticaAPIManager {
 	 * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
 	 * @returns {Promise<String>} Promise containing the raw API response data as a string.
 	 */
-	postRequest(baseURL, userID, userAPIToken, queryParams={}) {
-		let url = this.getQueryStringURL(baseURL, queryParams);
-
-		let promise = new Promise((resolve, reject) => {
-			let req = new XMLHttpRequest();
-			req.open("POST", url);
-
-			req.onerror = function() {
-				reject(this.responseText);
-			};
-
-			req.onload = function() {
-				if (req.status === 200) {
-					resolve(this.responseText);
-				} else {
-					reject(this.responseText);
-				}
-			}
-			req.setRequestHeader("x-client", this.xclient);
-			req.setRequestHeader("x-api-user", userID);
-			req.setRequestHeader("x-api-key", userAPIToken);
-			req.send();
-		});
-
-	}
-
 	postRequest(baseURL, userID, userAPIToken, queryParams={}) {
 		let url = this.getQueryStringURL(baseURL, queryParams);
 
