@@ -177,6 +177,32 @@ class HabiticaAPIManager {
 		return promise;
 	}
 
+	postRequest(baseURL, userID, userAPIToken, queryParams={}) {
+		let url = this.getQueryStringURL(baseURL, queryParams);
+
+		let promise = new Promise((resolve, reject) => {
+			let req = new XMLHttpRequest();
+			req.open("POST", url);
+
+			req.onerror = function() {
+				reject(this.responseText);
+			};
+
+			req.onload = function() {
+				if (req.status === 200) {
+					resolve(this.responseText);
+				} else {
+					reject(this.responseText);
+				}
+			}
+			req.setRequestHeader("x-client", this.xclient);
+			req.setRequestHeader("x-api-user", userID);
+			req.setRequestHeader("x-api-key", userAPIToken);
+			req.send();
+		});
+
+	}
+
 	// CLASS HELPER FUNCTIONS
 
 	/**
