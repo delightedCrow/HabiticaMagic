@@ -187,11 +187,9 @@ class HabiticaAPIManager {
 	 * @returns {Promise<String>} Promise containing the raw API response data as a string.
 	 */
 	postRequest(baseURL, userID, userAPIToken, queryParams={}) {
-		let url = this.getQueryStringURL(baseURL, queryParams);
-
 		let promise = new Promise((resolve, reject) => {
 			let req = new XMLHttpRequest();
-			req.open("POST", url);
+			req.open("POST", baseURL);
 
 			req.onerror = function() {
 				reject(this.responseText);
@@ -204,12 +202,13 @@ class HabiticaAPIManager {
 					reject(this.responseText);
 				}
 			}
+      req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			req.setRequestHeader("x-client", this.xclient);
 			req.setRequestHeader("x-api-user", userID);
 			req.setRequestHeader("x-api-key", userAPIToken);
-			req.send();
+			req.send(JSON.stringify(queryParams));
 		});
-
+		return promise
 	}
 
 	// CLASS HELPER FUNCTIONS
