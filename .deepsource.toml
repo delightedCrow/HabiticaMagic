@@ -5,7 +5,8 @@ exclude_patterns = [
     "src/header.js",
     "dist/*",
     "minify.js",
-    "docs/*"
+    "docs/*",
+    "*.md"
 ]
 
 [[analyzers]]
