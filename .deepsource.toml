@@ -2,7 +2,8 @@ version = 1
 
 exclude_patterns = [
     "package.json",
-    "src/header.js"
+    "src/header.js",
+    "dist/*"
 ]
 
 [[analyzers]]
