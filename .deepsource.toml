@@ -15,7 +15,3 @@ enabled = true
 
   [analyzers.meta]
   environment = ["browser"]
-
-[[transformers]]
-name = "prettier"
-enabled = true
