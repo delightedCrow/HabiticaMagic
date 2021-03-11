@@ -3,9 +3,9 @@ version = 1
 exclude_patterns = [
     "package.json",
     "src/header.js",
-    "dist/*",
+    "dist/**",
     "minify.js",
-    "docs/*",
+    "docs/**",
     "*.md"
 ]
 
