@@ -99,6 +99,23 @@ apiManager.authGetRequest(apiURL, "USER ID", "USER API TOKEN")
 });
 ```
 
+#### Generic Post Request
+
+HabiticaMagicJS provides a generalized `postRequest` function.
+
+##### postRequest Example: Adding a task
+
+```javascript
+var apiManager = new HabiticaAPIManager("Your x-client ID");
+
+let apiURL = "https://habitica.com/api/v3/tasks/user";
+let task = {
+	type: "TASK TYPE",
+	text: "TASK NAME",
+}
+apiManager.postRequest(apiURL, "USER ID", "USER API TOKEN", task)
+```
+
 #### Before Fetching HabiticaUsers: Getting the Habitica Content
 
 If you intend to use `HabiticaAPIManager` to get `HabiticaUser` objects, you should first start by fetching Habitica's content.
