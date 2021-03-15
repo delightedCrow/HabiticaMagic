@@ -196,7 +196,7 @@ class HabiticaAPIManager {
 			};
 
 			req.onload = function() {
-				if (req.status === 201) {
+				if (req.status === 201 || req.status === 200) {
 					resolve(this.responseText);
 				} else {
 					reject(this.responseText);
