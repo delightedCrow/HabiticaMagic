@@ -12,10 +12,9 @@ For the most comprehensive and up-to-date documentation on HabiticaMagicJS funct
 
 ## Limitations
 
-HabiticaMagicJS currently supports only `GET` requests at the moment, so it works best for projects that just need **read-only access to the Habitica API**.
+HabiticaMagicJS currently supports only `GET` and `POST` requests at the moment, so it works best for projects that just need **read-only access to the Habitica API**.
 
 If you want this to change, check out the [Contributing](#contributing) section ;)
-
 ## Usage And Examples
 
 ⚠️ Before you do anything else, you'll need to include the HabiticaMagicJS source in your project - check the [dist/](dist/) directory for the latest version!
@@ -98,6 +97,23 @@ apiManager.authGetRequest(apiURL, "USER ID", "USER API TOKEN")
 	// now you can party!
 	console.log(partyData);
 });
+```
+
+#### Generic Post Request
+
+HabiticaMagicJS provides a generalized `postRequest` function.
+
+##### postRequest Example: Adding a task
+
+```javascript
+var apiManager = new HabiticaAPIManager("Your x-client ID");
+
+let apiURL = "https://habitica.com/api/v3/tasks/user";
+let task = {
+	type: "TASK TYPE",
+	text: "TASK NAME",
+}
+apiManager.postRequest(apiURL, "USER ID", "USER API TOKEN", task)
 ```
 
 #### Before Fetching HabiticaUsers: Getting the Habitica Content
