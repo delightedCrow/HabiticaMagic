@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>HabiticaMagicJS - Demo</title>
+	<meta name="description" content="HabiticaMagicJS - Demo">
+	<meta name="author" content="@delightedCrow & @ArrayOfFrost">
+	<link rel="stylesheet" href="demo.css">
+	<link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+	<script src="demo.js"></script>
+</head>
+
+<body>
+	<h1>HabiticaMagicJS - Demo</h1>
+	<p>This demo uses <a href="https://github.com/delightedCrow/HabiticaMagic">HabiticaMagicJS</a> to get user profile data from the Habitica API (and Nunjucks to render HTML templates).</p>
+	<p>The CSS and design were lovingly pilfered from our other project, <a href="https://github.com/delightedCrow/MMM-HabiticaStats">MMM-HabiticaStats</a>.</p>
+	<div>
+		<fieldset>
+			<label for="userID-field">Enter a Habitica UserID:</label>
+			<div class="inputs">
+				<input type="text" value="fe3a326e-eba8-462a-968e-b97ab79336f5" id="userID-field"/>
+				<button class="submit" type="submit" onclick="demo.fetchUser()">Submit</button>
+			</div>
+		</fieldset>
+	</div>
+	<div id="profile-content"></div>
+
+	<div id="profile-template" class="template">
+		<div class="title-header">
+			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="scroll" class="title-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+				<!-- scroll icon by FontAwesome: https://fontawesome.com/license-->
+				<path fill="currentColor" d="M48 0C21.53 0 0 21.53 0 48v64c0 8.84 7.16 16 16 16h80V48C96 21.53 74.47 0 48 0zm208 412.57V352h288V96c0-52.94-43.06-96-96-96H111.59C121.74 13.41 128 29.92 128 48v368c0 38.87 34.65 69.65 74.75 63.12C234.22 474 256 444.46 256 412.57zM288 384v32c0 52.93-43.06 96-96 96h336c61.86 0 112-50.14 112-112 0-8.84-7.16-16-16-16H288z"></path></svg>
+			<h2 class="light">{{user.displayName}}</h2>
+			<div class="spacer"></div>
+		</div>
+		<div class="main-stats clearfix">
+			<span class="level"><i class="hi-class hi-{{user.className}} habitica-icon small-stat-icon"></i>{{user.className}} <span class="middot-separator">&middot;</span> Level {{user.level}}
+			</span>
+			<span class="wealth-group">
+				<i class="small-stat-icon hi-gold habitica-icon"></i>{{user.goldCompact}}<span class="unit">gold</span>
+			</span>
+		</div>
+		<div class="bio">
+			<p><span class="title">bio:</span> {% if user.bio %}{{ user.bio }}{% else %} This user doesn't have a bio, but we think it's a safe bet that they're awesome.{% endif %}</p>
+		</div>
+		<div class="rings clearfix">
+			<div class="stat-ring">
+				<div class="title">Health</div>
+				<i class="stat-icon hi-health habitica-icon"></i>
+				<svg viewBox="0 0 39 39" class="circular-chart">
+					<circle class="shadow-circle" cx="50%" cy="50%" r="15.9155"/>
+					<circle class="circle health" stroke-dasharray="{{user.health / user.healthMax * 100}}, 100" cx="50%" cy="50%" r="15.9155"/>
+				</svg>
+				<div class="ring-stats">
+					<span class="current-stat">{{user.health}}</span> <span class="max-stat">/ {{user.healthMax}}</span>
+				</div>
+			</div>
+
+			<div class="stat-ring">
+				<div class="title">Mana</div>
+				<i class="stat-icon hi-mana habitica-icon"></i>
+				<svg viewBox="0 0 39 39" class="circular-chart">
+					<circle class="shadow-circle" cx="50%" cy="50%" r="15.9155"/>
+					<circle class="circle mana" stroke-dasharray="{{user.mana / user.manaMax * 100}}, 100" cx="50%" cy="50%" r="15.9155"/>
+				</svg>
+				<div class="ring-stats">
+					<span class="current-stat">{{user.mana}}</span> <span class="max-stat">/ {{user.manaMax}}</span>
+				</div>
+			</div>
+
+			<div class="stat-ring">
+				<div class="title">Experience</div>
+				<i class="stat-icon hi-experience habitica-icon"></i>
+				<svg viewBox="0 0 39 39" class="circular-chart">
+					<circle class="shadow-circle" cx="50%" cy="50%" r="15.9155"/>
+					<circle class="circle experience" stroke-dasharray="{{user.experience / user.experienceToLevel * 100}}, 100" cx="50%" cy="50%" r="15.9155"/>
+				</svg>
+				<div class="ring-stats">
+					<span class="current-stat">{{user.experience}}</span> <span class="max-stat">/ {{user.experienceToLevel}}</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="error-template" class="template">
+		<p>An error: {{ data }}</p>
+	</div>
+	<script src="../../src/HabiticaUserTasksManager.js"></script>
+	<script src="../../src/HabiticaUser.js"></script>
+	<script src="../../src/HabiticaAPIManager.js"></script>
+	<script src="https://mozilla.github.io/nunjucks/files/nunjucks.js"></script>
+</body>
+</html>

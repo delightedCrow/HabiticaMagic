@@ -10,11 +10,6 @@ For an example of HabiticaMagicJS in action, check out the [demo](https://deligh
 
 For the most comprehensive and up-to-date documentation on HabiticaMagicJS functions, [check out the docs](https://delightedcrow.github.io/HabiticaMagic/docs/index.html).
 
-## Limitations
-
-HabiticaMagicJS currently supports only `GET` and `POST` requests at the moment, so it works best for projects that just need **read-only access to the Habitica API**.
-
-If you want this to change, check out the [Contributing](#contributing) section ;)
 ## Usage And Examples
 
 ⚠️ Before you do anything else, you'll need to include the HabiticaMagicJS source in your project - check the [dist/](dist/) directory for the latest version!
