@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Nothing yet :)
+- Added putRequest method
 
 ## 2.1.0 - 2021-3-23
 
