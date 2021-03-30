@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset='utf-8'>
   <title>HabiticaMagicJS 2.1.0 | Documentation</title>
@@ -20,9 +20,22 @@
             placeholder='Filter'
             id='filter-input'
             class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#habiticaapitoken'
+                  class="">
+                  HabiticaAPIToken
+                  
+                </a>
+                
+                </li>
               
                 
                 <li><a
@@ -105,6 +118,12 @@
                       </a></li>
                       
                       <li><a
+                        href='#habiticaapimanagerdeleterequest'
+                        class='regular pre-open'>
+                        #deleteRequest
+                      </a></li>
+                      
+                      <li><a
                         href='#habiticaapimanagerreplacekeyswithcontent'
                         class='regular pre-open'>
                         #replaceKeysWithContent
@@ -129,16 +148,6 @@
                   href='#habiticauserid'
                   class="">
                   HabiticaUserID
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#habiticaapitoken'
-                  class="">
-                  HabiticaAPIToken
                   
                 </a>
                 
@@ -312,6 +321,16 @@
               
                 
                 <li><a
+                  href='#dailystats'
+                  class="">
+                  DailyStats
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#habiticausertasksmanager'
                   class=" toggle-sibling">
                   HabiticaUserTasksManager
@@ -362,16 +381,6 @@
                 
                 </li>
               
-                
-                <li><a
-                  href='#dailystats'
-                  class="">
-                  DailyStats
-                  
-                </a>
-                
-                </li>
-              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -380,6 +389,61 @@
         </div>
       </div>
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='habiticaapitoken'>
+      HabiticaAPIToken
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
+
+    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
         
           
           <section class='p2 mb2 clearfix bg-white minishadow'>
@@ -448,6 +512,8 @@ into helpful class types.</p>
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
@@ -479,6 +545,8 @@ into helpful class types.</p>
   
   
   
+  
+
   
 
   
@@ -550,6 +618,8 @@ into helpful class types.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -583,6 +653,8 @@ into helpful class types.</p>
   
   
   
+  
+
   
 
   
@@ -657,6 +729,8 @@ into helpful class types.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -713,6 +787,8 @@ into helpful class types.</p>
 
       
     
+  
+
   
 
   
@@ -802,6 +878,8 @@ into helpful class types.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -878,6 +956,8 @@ into helpful class types.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -941,6 +1021,8 @@ into helpful class types.</p>
 
       
     
+  
+
   
 
   
@@ -1051,6 +1133,8 @@ into helpful class types.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1119,6 +1203,8 @@ For accessing personal data endpoints, use <a href="#habiticaapimanagerauthgetre
 
       
     
+  
+
   
 
   
@@ -1230,6 +1316,108 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='habiticaapimanagerdeleterequest'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>deleteRequest(baseURL, userID, userAPIToken, queryParams)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Make a DELETE request to the Habitica API.
+Data object returned varies based on the API url called.</p>
+
+    <div class='pre p1 fill-light mt0'>deleteRequest(baseURL: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, userID: <a href="#habiticauserid">HabiticaUserID</a>, userAPIToken: <a href="#habiticaapitoken">HabiticaAPIToken</a>, queryParams: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>baseURL</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    the url of the api call.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>userID</span> <code class='quiet'>(<a href="#habiticauserid">HabiticaUserID</a>)</code>
+	    the ID of the user, needed for authentication.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>userAPIToken</span> <code class='quiet'>(<a href="#habiticaapitoken">HabiticaAPIToken</a>)</code>
+	    the API Token for the user, needed for authentication.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>queryParams</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
+            = <code>{}</code>)</code>
+	    key-value pairs for any parameters needed by the api call.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>></code>:
+        Promise containing the raw API response data as a string.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 </section>
 
       </div>
@@ -1287,6 +1475,8 @@ Data object returned varies based on the API url called.</p>
 
       
     
+  
+
   
 
   
@@ -1378,6 +1568,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1426,57 +1618,6 @@ Data object returned varies based on the API url called.</p>
   
   
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='habiticaapitoken'>
-      HabiticaAPIToken
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>The User's API Token. See <a href="https://habitica.fandom.com/wiki/API_Options#API_Token">https://habitica.fandom.com/wiki/API_Options#API_Token</a></p>
-
-    <div class='pre p1 fill-light mt0'>HabiticaAPIToken</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
   
 
   
@@ -1554,6 +1695,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
@@ -1585,6 +1728,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -1656,6 +1801,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1689,6 +1836,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -1760,6 +1909,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1793,6 +1944,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -1864,6 +2017,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -1897,6 +2052,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -1968,6 +2125,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -2001,6 +2160,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -2072,6 +2233,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -2105,6 +2268,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -2176,6 +2341,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -2209,6 +2376,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -2280,6 +2449,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -2313,6 +2484,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -2384,6 +2557,8 @@ Data object returned varies based on the API url called.</p>
   
 
   
+
+  
 </section>
 
       </div>
@@ -2417,6 +2592,8 @@ Data object returned varies based on the API url called.</p>
   
   
   
+  
+
   
 
   
@@ -2489,6 +2666,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
 
   
+
+  
 </section>
 
       </div>
@@ -2522,6 +2701,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
   
   
+  
+
   
 
   
@@ -2593,6 +2774,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
 
   
+
+  
 </section>
 
       </div>
@@ -2626,6 +2809,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
   
   
+  
+
   
 
   
@@ -2697,6 +2882,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
 
   
+
+  
 </section>
 
       </div>
@@ -2730,6 +2917,8 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
   
   
   
+  
+
   
 
   
@@ -2790,367 +2979,6 @@ or <a href="#habiticausercostume">costume</a> depending on the users preferences
 
   
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-</div>
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='habiticausertasksmanager'>
-      HabiticaUserTasksManager
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>A class representing the list of tasks for a HabiticaUser.</p>
-
-    <div class='pre p1 fill-light mt0'>new HabiticaUserTasksManager(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>)</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>)</code>
-	    the list of tasks returned from the api call
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
-    <div class="clearfix">
-  
-    <div class='border-bottom' id='habiticausertasksmanagerapidata'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>apiData</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>The list of tasks.</p>
-
-    <div class='pre p1 fill-light mt0'>apiData</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='habiticausertasksmanagertasklist'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>taskList</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>The list of tasks.</p>
-
-    <div class='pre p1 fill-light mt0'>taskList</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='habiticausertasksmanagertodosduetoday'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>todosDueToday</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>The list of Todo tasks due by the end of today.</p>
-
-    <div class='pre p1 fill-light mt0'>todosDueToday</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='habiticausertasksmanagertodosdueondate'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>todosDueOnDate(dueDate)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>The list of Todo tasks due by the end of a specific date.</p>
-
-    <div class='pre p1 fill-light mt0'>todosDueOnDate(dueDate: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>dueDate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>)</code>
-	    the date to compare tasks due dates to.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
-        
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='habiticausertasksmanagercalculatedailystatsfor'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>calculateDailyStatsFor(user)</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  <p>Calculates the number of unfinished dailies due today, and any
-incoming damage that the user will take as a result.</p>
-
-    <div class='pre p1 fill-light mt0'>calculateDailyStatsFor(user: <a href="#habiticauser">HabiticaUser</a>): <a href="#dailystats">DailyStats</a></div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>user</span> <code class='quiet'>(<a href="#habiticauser">HabiticaUser</a>)</code>
-	    the user's stats are needed to calculate damage correctly.
-
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#dailystats">DailyStats</a></code>:
-        
-
-      
-    
   
 
   
@@ -3262,6 +3090,383 @@ incoming damage that the user will take as a result.</p>
   
 
   
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='habiticausertasksmanager'>
+      HabiticaUserTasksManager
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>A class representing the list of tasks for a HabiticaUser.</p>
+
+    <div class='pre p1 fill-light mt0'>new HabiticaUserTasksManager(data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>)</code>
+	    the list of tasks returned from the api call
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='habiticausertasksmanagerapidata'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>apiData</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The list of tasks.</p>
+
+    <div class='pre p1 fill-light mt0'>apiData</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='habiticausertasksmanagertasklist'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>taskList</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The list of tasks.</p>
+
+    <div class='pre p1 fill-light mt0'>taskList</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='habiticausertasksmanagertodosduetoday'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>todosDueToday</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The list of Todo tasks due by the end of today.</p>
+
+    <div class='pre p1 fill-light mt0'>todosDueToday</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='habiticausertasksmanagertodosdueondate'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>todosDueOnDate(dueDate)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>The list of Todo tasks due by the end of a specific date.</p>
+
+    <div class='pre p1 fill-light mt0'>todosDueOnDate(dueDate: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dueDate</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a>)</code>
+	    the date to compare tasks due dates to.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='habiticausertasksmanagercalculatedailystatsfor'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>calculateDailyStatsFor(user)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Calculates the number of unfinished dailies due today, and any
+incoming damage that the user will take as a result.</p>
+
+    <div class='pre p1 fill-light mt0'>calculateDailyStatsFor(user: <a href="#habiticauser">HabiticaUser</a>): <a href="#dailystats">DailyStats</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>user</span> <code class='quiet'>(<a href="#habiticauser">HabiticaUser</a>)</code>
+	    the user's stats are needed to calculate damage correctly.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#dailystats">DailyStats</a></code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
 
   
 
