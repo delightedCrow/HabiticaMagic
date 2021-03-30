@@ -10,22 +10,18 @@ For an example of HabiticaMagicJS in action, check out the [demo](https://deligh
 
 For the most comprehensive and up-to-date documentation on HabiticaMagicJS functions, [check out the docs](https://delightedcrow.github.io/HabiticaMagic/docs/index.html).
 
-## Limitations
-
-HabiticaMagicJS currently supports only `GET` and `POST` requests at the moment, so it works best for projects that just need **read-only access to the Habitica API**.
-
-If you want this to change, check out the [Contributing](#contributing) section ;)
 ## Usage And Examples
 
 ⚠️ Before you do anything else, you'll need to include the HabiticaMagicJS source in your project - check the [dist/](dist/) directory for the latest version!
 
 ### HabiticaAPIManager
 
-````javascript
+```javascript
 var apiManager = new HabiticaAPIManager("Your x-client ID", "en@pirate");
-````
+```
 
 The `HabiticaAPIManager` class is the primary way you'll interact with HabiticaMagicJS. Its constructor takes two parameters:
+
 - **x-client-id**: REQUIRED. Your x-client-id. [See Habitica's documentation here for what your x-client should be](https://habitica.fandom.com/wiki/Guidance_for_Comrades#X-Client_Header).
 - **language**: OPTIONAL. The language you want Habitica's content in. [See possible values here](https://habitica.com/apidoc/#api-Content-ContentGet). The default is `"en"` for english.
 
@@ -42,24 +38,25 @@ Check out this example of making multiple API requests and chaining them togethe
 let manager = new HabiticaAPIManager(xclient);
 
 // first we're going to do an API call to fetch the Habitica content data
-manager.fetchContentData()
-// once our content data fetch succeeds we can add the fetchUser()
-// API call to the promise chain.
-.then(() => {
-	return manager.fetchUser(userID);
-})
-// Now that our fetchUser call has finished we're done with API calls
-// (for now!) and we can send the resulting HabiticaUser object to our
-// renderUserTemplate function to display.
-.then((user) => {
-	this.renderUserTemplate(user);
-})
-// The nice thing about promise chains like this is that if an error
-// happens AT ANY POINT in the chain here we'll automatically skip
-// to this catch block, which will render our error template
-.catch((error) => {
-	this.renderErrorTemplate(error);
-});
+manager
+  .fetchContentData()
+  // once our content data fetch succeeds we can add the fetchUser()
+  // API call to the promise chain.
+  .then(() => {
+    return manager.fetchUser(userID);
+  })
+  // Now that our fetchUser call has finished we're done with API calls
+  // (for now!) and we can send the resulting HabiticaUser object to our
+  // renderUserTemplate function to display.
+  .then((user) => {
+    this.renderUserTemplate(user);
+  })
+  // The nice thing about promise chains like this is that if an error
+  // happens AT ANY POINT in the chain here we'll automatically skip
+  // to this catch block, which will render our error template
+  .catch((error) => {
+    this.renderErrorTemplate(error);
+  });
 ```
 
 #### Generic Get Requests
@@ -75,12 +72,11 @@ HabiticaMagicJS provides several fetch functions for getting specific API data (
 var apiManager = new HabiticaAPIManager("Your x-client ID");
 
 let apiURL = "https://habitica.com/api/v3/status";
-apiManager.getRequest(apiURL)
-.then((rawData) => {
-	// process the raw string of data into a JSON object
-	let statusData = JSON.parse(rawData).data;
-	// Now you know the API status!
-	console.log(statusData);
+apiManager.getRequest(apiURL).then((rawData) => {
+  // process the raw string of data into a JSON object
+  let statusData = JSON.parse(rawData).data;
+  // Now you know the API status!
+  console.log(statusData);
 });
 ```
 
@@ -90,13 +86,14 @@ apiManager.getRequest(apiURL)
 var apiManager = new HabiticaAPIManager("Your x-client ID");
 
 let apiURL = "https://habitica.com/api/v3/groups/party";
-apiManager.authGetRequest(apiURL, "USER ID", "USER API TOKEN")
-.then((rawData) => {
-	// process the raw string of data into a JSON object
-	let partyData = JSON.parse(rawData).data;
-	// now you can party!
-	console.log(partyData);
-});
+apiManager
+  .authGetRequest(apiURL, "USER ID", "USER API TOKEN")
+  .then((rawData) => {
+    // process the raw string of data into a JSON object
+    let partyData = JSON.parse(rawData).data;
+    // now you can party!
+    console.log(partyData);
+  });
 ```
 
 #### Generic Post Request
@@ -110,10 +107,10 @@ var apiManager = new HabiticaAPIManager("Your x-client ID");
 
 let apiURL = "https://habitica.com/api/v3/tasks/user";
 let task = {
-	type: "TASK TYPE",
-	text: "TASK NAME",
-}
-apiManager.postRequest(apiURL, "USER ID", "USER API TOKEN", task)
+  type: "TASK TYPE",
+  text: "TASK NAME",
+};
+apiManager.postRequest(apiURL, "USER ID", "USER API TOKEN", task);
 ```
 
 #### Before Fetching HabiticaUsers: Getting the Habitica Content
@@ -140,7 +137,9 @@ apiManager.fetchUser("USER-ID")
 	shield: "shield_base_0"
 }
 ```
+
 #### Example: fetchUser() After Content Fetch: details filled in!
+
 ```javascript
 // fetching the content first
 apiManager.fetchContentData()
@@ -183,23 +182,23 @@ These classes store the API returned by Habitica in a property (`.apiData`) and 
 - There is often a lot of complexity in the way the Habitica API returns data, which `HabiticaUser` smoothes over - just look at the following example for getting a user's gems.
 
 ##### Example: getting a user's gems
+
 ```javascript
 // Assuming you've already created an apiManager and fetched
 // Habitica the content data
-apiManager.fetchUserWithTasks("USER ID", "API TOKEN")
-.then((user) => {
-	// you can always get to the raw API object data from
-	// the .apiData property
-	console.log(user.apiData);
+apiManager.fetchUserWithTasks("USER ID", "API TOKEN").then((user) => {
+  // you can always get to the raw API object data from
+  // the .apiData property
+  console.log(user.apiData);
 
-	// If you were to use the old-fashioned way of finding out how
-	// many gems a user had you'd have to know the Habitica API
-	// returns gems in a data property called "balance", and that
-	// you had to multiply that value by 4.
-	console.log(user.apiData.balance * 4); // gives you # of gems...
+  // If you were to use the old-fashioned way of finding out how
+  // many gems a user had you'd have to know the Habitica API
+  // returns gems in a data property called "balance", and that
+  // you had to multiply that value by 4.
+  console.log(user.apiData.balance * 4); // gives you # of gems...
 
-	// But really you should just call:
-	console.log(user.gems); // what it does is obvious!
+  // But really you should just call:
+  console.log(user.gems); // what it does is obvious!
 });
 ```
 
@@ -209,29 +208,28 @@ apiManager.fetchUserWithTasks("USER ID", "API TOKEN")
 // Assuming you've already created an apiManager and fetched
 // Habitica the content data
 
-apiManager.fetchUserWithTasks("USER ID", "API TOKEN")
-.then((user) => {
-	// you can always get to the raw API object data from
-	// the .apiData property
-	console.log(user.apiData);
+apiManager.fetchUserWithTasks("USER ID", "API TOKEN").then((user) => {
+  // you can always get to the raw API object data from
+  // the .apiData property
+  console.log(user.apiData);
 
-	// user.tasks is actually a HabiticaUserTasksManager object that
-	// lets you do neat things like see the amount of damage your
-	// undone dailies will to!
-	console.log(user.tasks.dailyStats.dailyDamageToSelf);
+  // user.tasks is actually a HabiticaUserTasksManager object that
+  // lets you do neat things like see the amount of damage your
+  // undone dailies will to!
+  console.log(user.tasks.dailyStats.dailyDamageToSelf);
 
-	// want a list of this user's todos, due today?
-	console.log(user.tasks.todosDueToday);
+  // want a list of this user's todos, due today?
+  console.log(user.tasks.todosDueToday);
 
-	// user stats will be computed for you! Yay!
-	console.log(user.stats)
-		// output of console.log(user.stats):
-		// {
-		// 	totals: {str: 0, con: 0, int: 0, per: 0},
-		// 	armor: {str: 0, con: 0, int: 0, per: 0},
-		// 	buffs: {str: 0, con: 0, int: 0, per: 0},
-		// 	points: {str: 0, con: 0, int: 0, per: 0}
-		// }
+  // user stats will be computed for you! Yay!
+  console.log(user.stats);
+  // output of console.log(user.stats):
+  // {
+  // 	totals: {str: 0, con: 0, int: 0, per: 0},
+  // 	armor: {str: 0, con: 0, int: 0, per: 0},
+  // 	buffs: {str: 0, con: 0, int: 0, per: 0},
+  // 	points: {str: 0, con: 0, int: 0, per: 0}
+  // }
 });
 ```
 
@@ -242,6 +240,7 @@ apiManager.fetchUserWithTasks("USER ID", "API TOKEN")
 ### Build Scripts
 
 To run all the build scripts:
+
 ```bash
 npm run build
 ```
@@ -257,17 +256,21 @@ npm run build:minify
 Compiled files will be output in the `/dist` directory. To modify the build process, edit `minify.js`.
 
 ### Generating the Developer Docs
+
 The Developer documentation is generated from [JSDoc](https://jsdoc.app/index.html) formatted comments in the code, and created using [documentation.js](https://documentation.js.org/). To rebuild the documentation file after updating comments:
 
 First, install dependencies locally.
+
 ```bash
 npm install
 ```
 
 Then run the following command to build the html docs:
+
 ```bash
 npm run build:docs
 ```
+
 ---
 
 ## Contributing

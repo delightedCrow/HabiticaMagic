@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added postRequest method
 
+## 2.1.0 - 2021-3-23
+### Added
+- Added postRequest method (by [@Aras14HD](https://github.com/delightedCrow/HabiticaMagic/pull/4))
+
 ## 2.0.1 - 2019-11-15
 ### Changed
 - Updating HabiticaUser.class to return "mage" instead of "wizard" for users with a mage class.
