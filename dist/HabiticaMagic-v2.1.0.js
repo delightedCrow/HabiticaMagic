@@ -33,128 +33,121 @@ SOFTWARE.
  * @param {Array<object>} data - the list of tasks returned from the api call
  */
 class HabiticaUserTasksManager {
-  constructor(data) {
-    /**
-     * The list of tasks.
-     * @type {Array<object>}
-     */
-    this.apiData = data;
-  }
+	constructor(data) {
+		/**
+		 * The list of tasks.
+		 * @type {Array<object>}
+		 */
+		this.apiData = data;
+	}
 
-  /**
-   * The list of tasks.
-   * @type {Array<object>}
-   */
-  get taskList() {
-    return this.apiData;
-  }
+	/**
+	 * The list of tasks.
+	 * @type {Array<object>}
+	 */
+	get taskList() {
+		return this.apiData;
+	}
 
-  /**
-   * The list of Todo tasks due by the end of today.
-   * @type {Array<object>}
-   */
-  get todosDueToday() {
-    return this.todosDueOnDate(moment().endOf("day"));
-  }
+	/**
+	 * The list of Todo tasks due by the end of today.
+	 * @type {Array<object>}
+	 */
+	get todosDueToday() {
+		return this.todosDueOnDate(moment().endOf('day'));
+	}
 
-  /**
-   * The list of Todo tasks due by the end of a specific date.
-   * @param {Date} dueDate the date to compare tasks due dates to.
-   * @returns {Array<object>}
-   */
-  todosDueOnDate(dueDate) {
-    var todos = [];
+	/**
+	 * The list of Todo tasks due by the end of a specific date.
+	 * @param {Date} dueDate the date to compare tasks due dates to.
+	 * @returns {Array<object>}
+	 */
+	todosDueOnDate(dueDate) {
+		var todos = [];
 
-    for (var i = 0; i < this.taskList.length; i++) {
-      let task = this.taskList[i];
-      if (task.type != "todo") {
-        continue;
-      }
+		for (var i=0; i<this.taskList.length; i++) {
+			let task = this.taskList[i];
+			if (task.type != "todo") { continue; }
 
-      if (task.date) {
-        var taskTime = moment(task.date);
-        if (taskTime.isBefore(dueDate)) {
-          todos.push(task);
-        }
-      }
-    }
+			if (task.date) {
+				var taskTime = moment(task.date);
+				if (taskTime.isBefore(dueDate)) {
+						todos.push(task);
+				}
+			}
+		}
 
-    return todos;
-  }
+		return todos;
+	}
 
-  /**
-   * Calculates the number of unfinished dailies due today, and any
-   * incoming damage that the user will take as a result.
-   * @param {HabiticaUser} user - the user's stats are needed to calculate damage correctly.
-   * @returns {DailyStats}
-   */
-  calculateDailyStatsFor(user) {
-    var stats = {
-      dueCount: 0,
-      totalDamageToSelf: 0,
-      dailyDamageToSelf: 0,
-      bossDamage: 0,
-      dailiesEvaded: 0,
-    };
-    const min = -47.27; // task value cap min
-    const max = 21.27; // task value cap max
-    var stealthRemaining = user.stealth;
-    let conBonus = user.constitutionBonus;
+	/**
+	 * Calculates the number of unfinished dailies due today, and any
+	 * incoming damage that the user will take as a result.
+	 * @param {HabiticaUser} user - the user's stats are needed to calculate damage correctly.
+	 * @returns {DailyStats}
+	 */
+	calculateDailyStatsFor(user) {
 
-    for (var i = 0; i < this.taskList.length; i++) {
-      let task = this.taskList[i];
-      // skip the rest of this for loop if the task isn't a daily, isn't due, or is completed
-      if (task.type != "daily") {
-        continue;
-      }
-      if (!task.isDue || task.completed) {
-        continue;
-      }
+		var stats = {
+			dueCount: 0,
+			totalDamageToSelf: 0,
+			dailyDamageToSelf: 0,
+			bossDamage: 0,
+			dailiesEvaded: 0
+		}
+		const min = -47.27; // task value cap min
+		const max = 21.27; // task value cap max
+		var stealthRemaining = user.stealth;
+		let conBonus = user.constitutionBonus;
 
-      // thieves can cast stealth to avoid a certain number of dailies
-      if (stealthRemaining > 0) {
-        // avoided!
-        stealthRemaining--;
-        stats.dailiesEvaded++;
-      } else {
-        // calculate damage!
+		for (var i=0; i<this.taskList.length; i++) {
+			let task = this.taskList[i];
+			// skip the rest of this for loop if the task isn't a daily, isn't due, or is completed
+			if (task.type != "daily") { continue; }
+			if (!task.isDue || task.completed) { continue; }
 
-        stats.dueCount++;
+			// thieves can cast stealth to avoid a certain number of dailies
+			if (stealthRemaining > 0) { // avoided!
+				stealthRemaining --;
+				stats.dailiesEvaded ++;
+			} else { // calculate damage!
 
-        var taskDamage = task.value < min ? min : task.value;
-        taskDamage = taskDamage > max ? max : taskDamage;
-        taskDamage = Math.abs(Math.pow(0.9747, taskDamage));
+				stats.dueCount ++;
 
-        // if a subtask is completed, decrease the task damage proportionately
-        if (task.checklist.length > 0) {
-          var subtaskDamage = taskDamage / task.checklist.length;
-          for (var j = 0; j < task.checklist.length; j++) {
-            if (task.checklist[j].completed) {
-              taskDamage = taskDamage - subtaskDamage;
-            }
-          }
-        }
+				var taskDamage = (task.value < min) ? min : task.value;
+				taskDamage = (taskDamage > max) ? max : taskDamage;
+				taskDamage = Math.abs(Math.pow(0.9747, taskDamage));
 
-        var damage = taskDamage * conBonus * task.priority * 2;
-        stats.dailyDamageToSelf += Math.round(damage * 10) / 10; // round damage to nearest tenth because game does
+				// if a subtask is completed, decrease the task damage proportionately
+				if (task.checklist.length > 0 ) {
+					var subtaskDamage = (taskDamage/task.checklist.length);
+					for (var j=0; j<task.checklist.length; j++) {
+						if (task.checklist[j].completed) {
+							taskDamage = taskDamage - subtaskDamage;
+						}
+					}
+				}
 
-        // if we have a quest and a boss we can calculate the damage to party from this daily
-        if (user.isOnBossQuest) {
-          var bossDamage =
-            task.priority < 1 ? taskDamage * task.priority : taskDamage;
-          bossDamage *= user.quest.data.boss.str;
-          stats.bossDamage += bossDamage;
-        }
-      }
-    }
-    // formatting display - rounding up to be safe like Lady Alys does :) - see https://github.com/Alys/tools-for-habitrpg/blob/29710e0f99c9d706d6911f49d60bcceff2792768/habitrpg_user_data_display.html#L1952
-    stats.totalDamageToSelf = stats.dailyDamageToSelf + stats.bossDamage;
-    stats.totalDamageToSelf = Math.ceil(stats.totalDamageToSelf * 10) / 10;
-    stats.bossDamage = Math.ceil(stats.bossDamage * 10) / 10;
+				var damage = taskDamage * conBonus * task.priority * 2;
+				stats.dailyDamageToSelf += Math.round(damage * 10) / 10; // round damage to nearest tenth because game does
 
-    this.dailyStats = stats;
-  }
+				// if we have a quest and a boss we can calculate the damage to party from this daily
+				if (user.isOnBossQuest) {
+					var bossDamage = (task.priority < 1) ? (taskDamage * task.priority) : taskDamage;
+					bossDamage *= user.quest.data.boss.str;
+					stats.bossDamage += bossDamage;
+				}
+			}
+		}
+		// formatting display - rounding up to be safe like Lady Alys does :) - see https://github.com/Alys/tools-for-habitrpg/blob/29710e0f99c9d706d6911f49d60bcceff2792768/habitrpg_user_data_display.html#L1952
+		stats.totalDamageToSelf = stats.dailyDamageToSelf + stats.bossDamage;
+		stats.totalDamageToSelf = Math.ceil(stats.totalDamageToSelf * 10) / 10;
+		stats.bossDamage = Math.ceil(stats.bossDamage * 10) / 10;
+
+		this.dailyStats = stats;
+	}
 }
+
 
 /**
  * @typedef {object} DailyStats
@@ -171,252 +164,252 @@ class HabiticaUserTasksManager {
  * @param {object} data the json data object returned from the habitica API.
  */
 class HabiticaUser {
-  constructor(data) {
-    this.apiData = data;
-    this.stats = this._calculateStats();
-  }
-  /**
-   * The number of Subscriber Gems the user owns.
-   * @type {number}
-   */
-  get gems() {
-    return this.apiData.balance * 4;
-  }
-  /**
-   * The number of Mystic Hourglasses the user owns.
-   * @type {number}
-   */
-  get hourglasses() {
-    return this.apiData.purchased.plan.consecutive.trinkets;
-  }
-  /**
-   * The amount of Gold the user owns.
-   * @type {number}
-   */
-  get gold() {
-    return Math.round(this.apiData.stats.gp);
-  }
-  /**
-   * The amount of Gold the user owns as a nicely formatted string.
-   * @type {number}
-   */
-  get goldCompact() {
-    const formatter = new Intl.NumberFormat("lookup", {
-      notation: "compact",
-      compactDisplay: "short",
-    });
-    return formatter.format(this.gold);
-  }
-  /**
-   * The experience level of the user.
-   * @type {number}
-   */
-  get level() {
-    return this.apiData.stats.lvl;
-  }
-  /**
-   * The displayed name of the user.
-   * @type {string}
-   */
-  get displayName() {
-    return this.apiData.profile.name;
-  }
-  /**
-   * The character class of the user.
-   * @type {string}
-   */
-  get className() {
-    // the mage class is defined as "wizard" in the API, but referred
-    // to everywhere else in Habitica as mage, so we're gonna return mage
-    // here as that's what users on the front end would expect to see
-    // https://habitica.fandom.com/wiki/Guidance_for_Comrades#Class_Name_.28State_Mage_Instead_of_Wizard.29
-    if (this.apiData.stats.class == "wizard") {
-      return "mage";
-    }
-    return this.apiData.stats.class;
-  }
-  /**
-   * The bio of the user (may contain markdown formatting).
-   * @type {string}
-   */
-  get bio() {
-    return this.apiData.profile.blurb;
-  }
-  /**
-   * The experience points the user has gained so far this level.
-   * @type {Number}
-   */
-  get experience() {
-    return Math.floor(this.apiData.stats.exp);
-  }
-  /**
-   * The experience points needed to reach the next level.
-   * @type {Number}
-   */
-  get experienceToLevel() {
-    return Math.round(this.apiData.stats.toNextLevel);
-  }
-  /**
-   * The amount of remaining Mana the user currently has.
-   * @type {Number}
-   */
-  get mana() {
-    return Math.floor(this.apiData.stats.mp);
-  }
-  /**
-   * The maximum amount of mana the user can have.
-   * @type {Number}
-   */
-  get manaMax() {
-    return Math.round(this.apiData.stats.maxMP);
-  }
-  /**
-   * The amount of remaining health the user currently has.
-   * @type {Number}
-   */
-  get health() {
-    return Math.floor(this.apiData.stats.hp);
-  }
-  /**
-   * The maximum amount of health the user can have.
-   * @type {Number}
-   */
-  get healthMax() {
-    return Math.round(this.apiData.stats.maxHealth);
-  }
-  /**
-   * The number of dailies this user can skip without taking damage. (Rogue Skill)
-   * @type {Number}
-   */
-  get stealth() {
-    return this.apiData.stats.buffs.stealth;
-  }
-  /**
-   * The set of items this user has equipped.
-   * @type {object}
-   */
-  get armor() {
-    return this.apiData.items.gear.equipped;
-  }
-  /**
-   * The set of costume items this user has equipped.
-   * @type {object}
-   */
-  get costume() {
-    return this.apiData.items.gear.costume;
-  }
-  /**
-   * The visual set of items the user has on (either {@link HabiticaUser#armor|armor}
-   * or {@link HabiticaUser#costume|costume} depending on the users preferences).
-   * @type {object}
-   */
-  get outfit() {
-    return this.apiData.preferences.costume == true ? this.costume : this.armor;
-  }
-  /**
-   * Flag to check if user is in the Inn.
-   * @type {Boolean}
-   */
-  get isSleeping() {
-    return this.apiData.preferences.sleep;
-  }
+	constructor(data) {
+		this.apiData = data;
+		this.stats = this._calculateStats();
+	}
+	/**
+	 * The number of Subscriber Gems the user owns.
+	 * @type {number}
+	 */
+	get gems() {
+		return this.apiData.balance * 4;
+	}
+	/**
+	 * The number of Mystic Hourglasses the user owns.
+	 * @type {number}
+	 */
+	get hourglasses() {
+		return this.apiData.purchased.plan.consecutive.trinkets;
+	}
+	/**
+	 * The amount of Gold the user owns.
+	 * @type {number}
+	 */
+	get gold() {
+		return Math.round(this.apiData.stats.gp);
+	}
+	/**
+	 * The amount of Gold the user owns as a nicely formatted string.
+	 * @type {number}
+	 */
+	get goldCompact() {
+		const formatter = new Intl.NumberFormat('lookup', {
+			notation: 'compact',
+			compactDisplay: 'short',
+		});
+		return formatter.format(this.gold);
+	}
+	/**
+	 * The experience level of the user.
+	 * @type {number}
+	 */
+	get level() {
+		return this.apiData.stats.lvl;
+	}
+	/**
+	 * The displayed name of the user.
+	 * @type {string}
+	 */
+	get displayName() {
+		return this.apiData.profile.name;
+	}
+	/**
+	 * The character class of the user.
+	 * @type {string}
+	 */
+	get className() {
+		// the mage class is defined as "wizard" in the API, but referred
+		// to everywhere else in Habitica as mage, so we're gonna return mage
+		// here as that's what users on the front end would expect to see
+		// https://habitica.fandom.com/wiki/Guidance_for_Comrades#Class_Name_.28State_Mage_Instead_of_Wizard.29
+		if (this.apiData.stats.class == "wizard") {
+			return "mage";
+		}
+		return this.apiData.stats.class;
+	}
+	/**
+	 * The bio of the user (may contain markdown formatting).
+	 * @type {string}
+	 */
+	get bio() {
+		return this.apiData.profile.blurb;
+	}
+	/**
+	 * The experience points the user has gained so far this level.
+	 * @type {Number}
+	 */
+	get experience() {
+		return Math.floor(this.apiData.stats.exp);
+	}
+	/**
+	 * The experience points needed to reach the next level.
+	 * @type {Number}
+	 */
+	get experienceToLevel() {
+		return Math.round(this.apiData.stats.toNextLevel);
+	}
+	/**
+	 * The amount of remaining Mana the user currently has.
+	 * @type {Number}
+	 */
+	get mana() {
+		return Math.floor(this.apiData.stats.mp);
+	}
+	/**
+	 * The maximum amount of mana the user can have.
+	 * @type {Number}
+	 */
+	get manaMax() {
+		return Math.round(this.apiData.stats.maxMP);
+	}
+	/**
+	 * The amount of remaining health the user currently has.
+	 * @type {Number}
+	 */
+	get health() {
+		return Math.floor(this.apiData.stats.hp);
+	}
+	/**
+	 * The maximum amount of health the user can have.
+	 * @type {Number}
+	 */
+	get healthMax() {
+		return Math.round(this.apiData.stats.maxHealth);
+	}
+	/**
+	 * The number of dailies this user can skip without taking damage. (Rogue Skill)
+	 * @type {Number}
+	 */
+	get stealth() {
+		return this.apiData.stats.buffs.stealth;
+	}
+	/**
+	 * The set of items this user has equipped.
+	 * @type {object}
+	 */
+	get armor() {
+		return this.apiData.items.gear.equipped;
+	}
+	/**
+	 * The set of costume items this user has equipped.
+	 * @type {object}
+	 */
+	get costume() {
+		return this.apiData.items.gear.costume;
+	}
+	/**
+	 * The visual set of items the user has on (either {@link HabiticaUser#armor|armor}
+	 * or {@link HabiticaUser#costume|costume} depending on the users preferences).
+	 * @type {object}
+	 */
+	get outfit() {
+		return this.apiData.preferences.costume == true ? this.costume : this.armor;
+	}
+	/**
+	 * Flag to check if user is in the Inn.
+	 * @type {Boolean}
+	 */
+	get isSleeping() {
+		return this.apiData.preferences.sleep;
+	}
 
-  /**
-   * @private
-   */
-  _calculateStats() {
-    var stats = {
-      totals: { str: 0, con: 0, int: 0, per: 0 },
-      armor: { str: 0, con: 0, int: 0, per: 0 },
-      buffs: {
-        str: this.apiData.stats.buffs.str,
-        con: this.apiData.stats.buffs.con,
-        int: this.apiData.stats.buffs.int,
-        per: this.apiData.stats.buffs.per,
-      },
-      points: {
-        str: this.apiData.stats.str,
-        con: this.apiData.stats.con,
-        int: this.apiData.stats.int,
-        per: this.apiData.stats.per,
-      },
-    };
+	/**
+	 * @private
+	 */
+	_calculateStats() {
+		var stats = {
+			totals: {str: 0, con: 0, int: 0, per: 0},
+			armor: {str: 0, con: 0, int: 0, per: 0},
+			buffs: {
+				str: this.apiData.stats.buffs.str,
+				con: this.apiData.stats.buffs.con,
+				int: this.apiData.stats.buffs.int,
+				per: this.apiData.stats.buffs.per
+			},
+			points: {
+				str: this.apiData.stats.str,
+				con: this.apiData.stats.con,
+				int: this.apiData.stats.int,
+				per: this.apiData.stats.per
+			}
+		}
 
-    // calculate armor stats from each piece of armor
-    for (var key in this.armor) {
-      let item = this.armor[key];
-      for (var stat in stats.armor) {
-        stats.armor[stat] += item[stat];
-        // apply class bonus if user is wearing special class gear
-        if (
-          this.className === item.klass ||
-          this.className === item.specialClass
-        ) {
-          stats.armor[stat] += 0.5 * item[stat];
-        }
-      }
-    }
+		// calculate armor stats from each piece of armor
+		for (var key in this.armor) {
+			let item = this.armor[key];
+			for (var stat in stats.armor) {
+				stats.armor[stat] += item[stat];
+				// apply class bonus if user is wearing special class gear
+				if (this.className === item.klass ||
+						this.className === item.specialClass) {
+					stats.armor[stat] += .5 * item[stat];
+				}
+			}
+		}
 
-    // add up all stats for total, including level bonus
-    let levelBonus = Math.floor(this.level / 2);
-    for (var stat in stats.totals) {
-      stats.totals[stat] =
-        stats.armor[stat] + stats.buffs[stat] + stats.points[stat] + levelBonus;
-    }
+		// add up all stats for total, including level bonus
+		let levelBonus = Math.floor(this.level / 2);
+		for (var stat in stats.totals) {
+			stats.totals[stat] = stats.armor[stat] +
+				stats.buffs[stat] +
+				stats.points[stat] +
+				levelBonus;
+		}
 
-    return stats;
-  }
+		return stats;
+	}
 
-  /**
-   * This user's constitution bonus against daily damage.
-   * @type {Number}
-   */
-  get constitutionBonus() {
-    let bonus = 1 - this.stats.totals.con / 250;
-    return bonus < 0.1 ? 0.1 : bonus;
-  }
+	/**
+	 * This user's constitution bonus against daily damage.
+	 * @type {Number}
+	 */
+	get constitutionBonus() {
+		let bonus = 1 - (this.stats.totals.con / 250);
+		return (bonus < 0.1) ? 0.1 : bonus;
+	}
 
-  /**
-   * The quest the user is currently on, if any.
-   * @type {object}
-   */
-  get quest() {
-    return this.apiData.party.quest;
-  }
+	/**
+	 * The quest the user is currently on, if any.
+	 * @type {object}
+	 */
+	get quest() {
+		return (this.apiData.party.quest);
+	}
 
-  /**
-   * Flag to check if user is on a quest.
-   * @type {Boolean}
-   */
-  get isOnQuest() {
-    if (this.quest.data != null) {
-      return true;
-    }
-    return false;
-  }
+	/**
+	 * Flag to check if user is on a quest.
+	 * @type {Boolean}
+	 */
+	get isOnQuest() {
+		if (this.quest.data != null) {
+			return true;
+		}
+		return false;
+	}
 
-  /**
-   * Flag to check if user is on a boss quest.
-   * @type {Boolean}
-   */
-  get isOnBossQuest() {
-    if (this.isOnQuest && this.quest.data.boss != null) {
-      return true;
-    }
-    return false;
-  }
+	/**
+	 * Flag to check if user is on a boss quest.
+	 * @type {Boolean}
+	 */
+	get isOnBossQuest() {
+		if (this.isOnQuest && this.quest.data.boss != null) {
+			return true;
+		}
+		return false;
+	}
 
-  set tasks(userTaskManager) {
-    this._taskManager = userTaskManager;
-    this.tasks.calculateDailyStatsFor(this);
-  }
-  /**
-   * The object managing this users tasks, if they have been loaded.
-   * @type {HabiticaUserTasksManager}
-   */
-  get tasks() {
-    return this._taskManager;
-  }
+	set tasks(userTaskManager) {
+		this._taskManager = userTaskManager;
+		this.tasks.calculateDailyStatsFor(this);
+	}
+	/**
+	 * The object managing this users tasks, if they have been loaded.
+	 * @type {HabiticaUserTasksManager}
+	 */
+	get tasks() {
+		return this._taskManager;
+	}
 }
 
 /**
@@ -609,6 +602,40 @@ class HabiticaAPIManager {
     let promise = new Promise((resolve, reject) => {
       let req = new XMLHttpRequest();
       req.open("POST", baseURL);
+
+      req.onerror = function () {
+        reject(this.responseText);
+      };
+
+      req.onload = function () {
+        if (req.status === 201 || req.status === 200) {
+          resolve(this.responseText);
+        } else {
+          reject(this.responseText);
+        }
+      };
+      req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      req.setRequestHeader("x-client", this.xclient);
+      req.setRequestHeader("x-api-user", userID);
+      req.setRequestHeader("x-api-key", userAPIToken);
+      req.send(JSON.stringify(queryParams));
+    });
+    return promise;
+  }
+
+  /**
+   * Make a PUT request to the Habitica API.
+   * Data object returned varies based on the API url called.
+   * @param {string} baseURL - the url of the api call.
+   * @param {HabiticaUserID} userID - the ID of the user, needed for authentication.
+   * @param {HabiticaAPIToken} userAPIToken - the API Token for the user, needed for authentication.
+   * @param {object} [queryParams={}] - key-value pairs for any parameters needed by the api call.
+   * @returns {Promise<String>} Promise containing the raw API response data as a string.
+   */
+  putRequest(baseURL, userID, userAPIToken, queryParams = {}) {
+    let promise = new Promise((resolve, reject) => {
+      let req = new XMLHttpRequest();
+      req.open("PUT", baseURL);
 
       req.onerror = function () {
         reject(this.responseText);
